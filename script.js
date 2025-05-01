@@ -13,18 +13,14 @@ fetch("http://localhost:3000/tasks")
           tasksHTML += `<p>${t}</p>`;
         });
         studentsHTML += `<p><strong>${s.name}</strong></p>
-    <div class="tasks">
-    ${tasksHTML}
-    </div>
-    
-    `;
+                        <div class="tasks">${tasksHTML}</div>`;
       });
       // c for class
       tasksContainerHtml += `<div class='class'>
-  <h3 class="class-title">Class ${c.className}</h3>
-  <hr style="margin: 8px 0">
-  <div class="student">${studentsHTML}</div>
-  </div>`;
+                              <h3 class="class-title">Class ${c.className}</h3>
+                              <hr style="margin: 8px 0">
+                              <div class="student">${studentsHTML}</div>
+                              </div>`;
     });
     document.querySelector(".tasks-container").innerHTML = tasksContainerHtml;
   })
@@ -122,35 +118,4 @@ function handleVideoStateChange(event) {
     event.target.seekTo(0);
     event.target.pauseVideo();
   }
-}
-
-// Sharing Function
-function handleShare() {
-  const pageUrl = "https://bit.ly/rasakhowa";
-  if (isMobileDevice()) {
-    window.open(`https://wa.me/?text=${encodeURIComponent(pageUrl)}`, "_blank");
-  } else {
-    copyToClipboard(pageUrl);
-  }
-}
-
-function isMobileDevice() {
-  return /Mobi|Android|iPhone|iPad|iPod|BlackBerry|Windows Phone/i.test(
-    navigator.userAgent
-  );
-}
-
-function copyToClipboard(text) {
-  navigator.clipboard.writeText(text).then(() => showToast("Link Copied!"));
-}
-
-function showToast(message) {
-  const toast = document.getElementById("toast");
-  toast.innerText = message;
-  toast.style.opacity = "1";
-  toast.style.display = "block";
-  setTimeout(() => {
-    toast.style.opacity = "0";
-    setTimeout(() => (toast.style.display = "none"), 500);
-  }, 900);
 }
