@@ -10,7 +10,16 @@ mongoose.connect(
   "mongodb+srv://teenpro59:95APBykPrJtaT6vD@personal.saxkeww.mongodb.net/taskdb"
 );
 
-const TaskSchema = new mongoose.Schema({ name: String });
+const TaskSchema = new mongoose.Schema({
+  className: String,
+  students: [
+    {
+      name: String,
+      tasks: [String],
+    },
+  ],
+});
+
 const Task = mongoose.model("Task", TaskSchema);
 
 app.get("/tasks", async (req, res) => {
@@ -19,7 +28,8 @@ app.get("/tasks", async (req, res) => {
 });
 
 app.post("/tasks", async (req, res) => {
-  const task = new Task({ name: req.body.name });
+  const { className, students } = req.body;
+  const task = new Task({ className, students });
   await task.save();
   res.json(task);
 });
