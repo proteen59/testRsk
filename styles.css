@@ -1,0 +1,87 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  background-color: #f0f2f5;
+  display: flex;
+  padding: 20px;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+  /* Allows scrolling without a visible scrollbar */
+  -webkit-overflow-scrolling: touch;
+  /* Enables smooth scrolling for mobile devices */
+  scrollbar-width: none;
+  /* Hides scrollbar for Firefox */
+}
+
+.main-container {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
+
+#megaphone,
+.class {
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  background-color: #fff;
+}
+.tasks-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.class {
+  flex: 1;
+}
+.class-title {
+  text-align: center;
+}
+.tasks {
+  position: relative;
+  left: 10px;
+}
+
+#download-button,
+#share-button {
+  cursor: pointer;
+  font-weight: bold;
+  padding: 8px 20px;
+  margin: 10px 10px;
+  border: none;
+  background-color: #1877f2;
+  text-align: center;
+  width: 160px;
+  border-radius: 6px;
+  position: relative;
+  text-decoration: none;
+  color: #fff;
+}
+#megaphone {
+  font-weight: bold;
+}
+
+#megaphone p {
+  margin: 10px;
+}
+
+.video {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  background-color: #000;
+}
+
+@media (max-width:380px) {
+  .tasks-container {
+    grid-template-columns: 1fr;
+  }
+}
