@@ -1,8 +1,9 @@
 let tasks = [];
 
-fetch("http://localhost:3000/tasks")
+fetch("/api/data")
   .then((res) => res.json())
   .then((data) => {
+    console.log(data);
     tasks = data.map((item) => item);
     let tasksContainerHtml = "";
     tasks.forEach((c) => {
