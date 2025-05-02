@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+
 * {
   margin: 0;
   padding: 0;
@@ -5,7 +8,7 @@
 }
 
 body {
-  font-family: Geneva, Verdana, Arial, sans-serif;
+  font-family: Roboto, Arial, sans-serif;
   background-color: #f0f2f5;
   display: flex;
   padding: 20px;
@@ -36,9 +39,6 @@ body {
   flex-direction: column;
   gap: 10px;
 }
-.class {
-  flex: 1;
-}
 .class-title {
   text-align: center;
 }
@@ -68,10 +68,4 @@ body {
 
 #megaphone a button:hover {
   background-color: #1764ca;
-}
-
-@media (max-width: 380px) {
-  .tasks-container {
-    grid-template-columns: 1fr;
-  }
 }
