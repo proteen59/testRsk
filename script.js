@@ -4,6 +4,8 @@ fetch("/api/tasks")
   .then((res) => res.json())
   .then((data) => {
     tasks = data.map((item) => item);
+    console.log("tasks", tasks);
+    console.log("data", data);
     let tasksContainerHtml = "";
     tasks.forEach((c) => {
       let studentsHTML = "";
