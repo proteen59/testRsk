@@ -1,6 +1,6 @@
 let tasks = [];
 
-fetch("/api/tasks")
+fetch("/api/data")
   .then((res) => res.json())
   .then((data) => {
     tasks = data.map((item) => item);
