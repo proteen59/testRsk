@@ -33,6 +33,11 @@ body {
   padding: 20px;
   background-color: #fff;
 }
+.buttons {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+}
 .tasks-container {
   display: flex;
   flex-direction: column;
@@ -70,4 +75,10 @@ body {
 
 #megaphone a button:hover {
   background-color: #1764ca;
+}
+@media (max-width:300px) {
+  .buttons {
+    flex-direction: column;
+    align-items: center;
+  }
 }

@@ -38,9 +38,16 @@ async function fetchLatestVideos(playlistId) {
       let title = await fetchTitle(videoId);
       if (videoId) {
         document.getElementById("megaphone").innerHTML = `<p>${title}</p>
-            <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank">
-              <button>Watch Video</button>
-            </a>`;
+                                                          <div class="buttons">
+                                                            <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank">
+                                                              <button>Watch Video</button>
+                                                            </a>
+                                                            <a href="https://www.youtube.com/playlist?list=${playlistId}">
+                                                            <button>All Videos</button>
+                                                            </a>
+                                                          </div>
+            
+            `;
       }
     });
   } catch (error) {
