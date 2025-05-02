@@ -4,8 +4,6 @@ fetch("/api/tasks")
   .then((res) => res.json())
   .then((data) => {
     tasks = data.map((item) => item);
-    console.log("tasks", tasks);
-    console.log("data", data);
     let tasksContainerHtml = "";
     tasks.forEach((c) => {
       let studentsHTML = "";
@@ -36,20 +34,11 @@ fetchLatestVideos(playlistId);
 async function fetchLatestVideos(playlistId) {
   try {
     await new Promise(async () => {
-      let title = "";
       const videoId = await getLatestVideoId(playlistId);
-
-      await fetch(
-        `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${apiKey}`
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          title = data.items[0].snippet.title;
-        });
-
+      let title = await fetchTitle(videoId);
       if (videoId) {
         document.getElementById("megaphone").innerHTML = `<p>${title}</p>
-            <a href="https://www.youtube.com/watch?v=${videoId}">
+            <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank">
               <button>Watch Video</button>
             </a>`;
       }
@@ -71,4 +60,16 @@ async function getLatestVideoId(playlistId) {
     console.error("Error fetching latest video:", error);
     return null;
   }
+}
+
+async function fetchTitle(videoId) {
+  let title = "";
+  await fetch(
+    `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${apiKey}`
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      title = data.items[0].snippet.title;
+    });
+  return title;
 }
