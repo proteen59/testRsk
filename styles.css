@@ -42,6 +42,9 @@ body {
 .class-title {
   text-align: center;
 }
+.student p {
+  color: rgb(155, 0, 121);
+}
 .tasks {
   position: relative;
   left: 10px;
