@@ -12,7 +12,7 @@ fetch("/api/tasks")
         s.tasks.forEach((t) => {
           tasksHTML += `<p>${t}</p>`;
         });
-        studentsHTML += `<p><strong>${s.name}</strong></p>
+        studentsHTML += `<p>${s.name}</p>
                         <div class="tasks">${tasksHTML}</div>`;
       });
       // c for class
