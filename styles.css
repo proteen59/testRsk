@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 * {
   margin: 0;
@@ -42,7 +41,7 @@ body {
 .class-title {
   text-align: center;
 }
-.student p {
+.student > p {
   color: rgb(155, 0, 121);
 }
 .tasks {
