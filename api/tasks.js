@@ -7,7 +7,7 @@ const client = new MongoClient(uri);
 module.exports = async (req, res) => {
   try {
     await client.connect();
-    const db = client.db('tution');
+    const db = client.db('tuition');
     const data = await db.collection('tasks').find().toArray();
     res.status(200).json(data);
   } catch (err) {
