@@ -66,18 +66,23 @@ body {
   color: #fff;
 }
 #megaphone {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#megaphone a button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #1877f2;
   font-weight: bold;
+  color: white;
+  cursor: pointer;
 }
 
-#megaphone p {
-  margin: 10px;
-}
-
-.video {
-  position: relative;
-  aspect-ratio: 16 / 9;
-  width: 100%;
-  background-color: #000;
+#megaphone a button:hover {
+  background-color: #1764ca;
 }
 
 @media (max-width:380px) {
