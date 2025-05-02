@@ -8,8 +8,8 @@ module.exports = async (req, res) => {
   try {
     await client.connect();
     const db = client.db('tution');
-    const tasks = await db.collection('tasks').find().toArray();
-    res.status(200).json(tasks);
+    const data = await db.collection('tasks').find().toArray();
+    res.status(200).json(data);
   } catch (err) {
     res.status(500).json({ error: 'Database error' });
   } finally {
