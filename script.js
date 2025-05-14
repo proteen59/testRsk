@@ -1,6 +1,6 @@
 let tasks = [];
 let savedTasks = JSON.parse(localStorage.getItem("savedTasks"));
-const loadingElement = document.getElementById('loading');
+const loadingElement = document.getElementById("loading");
 
 fetch("/api/tasks")
   .then((res) => res.json())
@@ -16,6 +16,10 @@ rendering(savedTasks);
 
 function rendering(tsk) {
   let tasksContainerHtml = "";
+  if (!tsk) {
+    document.querySelector(".tasks-container").innerHTML =
+      "<div class='class' style='text-align:center'>Loading Tasks</div>";
+  }
   tsk.forEach((c) => {
     let studentsHTML = "";
     c.students.forEach((s) => {
