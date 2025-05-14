@@ -1,30 +1,45 @@
 let tasks = [];
+let savedTasks = JSON.parse(localStorage.getItem("savedTasks"));
+const loadingElement = document.getElementById('loading');
 
 fetch("/api/tasks")
   .then((res) => res.json())
   .then((data) => {
-    tasks = data.map((item) => item);
-    let tasksContainerHtml = "";
-    tasks.forEach((c) => {
-      let studentsHTML = "";
-      c.students.forEach((s) => {
-        let tasksHTML = "";
-        s.tasks.forEach((t) => {
-          tasksHTML += `<p>${t}</p>`;
-        });
-        studentsHTML += `<p>${s.name}</p>
-                        <div class="tasks">${tasksHTML}</div>`;
+    localStorage.setItem("savedTasks", JSON.stringify(data));
+    tasks = data;
+    loadingElement.remove();
+    rendering(tasks);
+  })
+  .catch((err) => console.error(err));
+
+rendering(savedTasks);
+
+function rendering(t) {
+  let tasksContainerHtml = "";
+  t.forEach((c) => {
+    let studentsHTML = "";
+    c.students.forEach((s) => {
+      let tasksHTML = "";
+      s.tasks.forEach((t) => {
+        if (t.includes("<a")) {
+          tasksHTML += `<div style='margin:5px 5px 5px 0; display:inline-block'>${t}</div>`;
+          return;
+        }
+        tasksHTML += `<p>${t}</p>`;
       });
-      // c for class
-      tasksContainerHtml += `<div class='class'>
+      studentsHTML += `<p>${s.name}</p>
+                        <div class="tasks">${tasksHTML}</div>`;
+    });
+    // c for class
+    tasksContainerHtml += `<div class='class'>
                               <h3 class="class-title">Class ${c.className}</h3>
                               <hr style="margin: 8px 0">
                               <div class="student">${studentsHTML}</div>
                               </div>`;
-    });
-    document.querySelector(".tasks-container").innerHTML = tasksContainerHtml;
-  })
-  .catch((err) => console.error(err));
+  });
+
+  document.querySelector(".tasks-container").innerHTML = tasksContainerHtml;
+}
 
 const playlistId = "PLfk05yfiSxmJmPGazkiYmKZQKi0_lwtK-";
 const apiKey = "AIzaSyA4lMpTZYgr_YOcCyENIkONcZiFkEpbaAY";
@@ -35,7 +50,7 @@ async function fetchLatestVideos(playlistId) {
   try {
     await new Promise(async () => {
       const videoId = await getLatestVideoId(playlistId);
-      let title = await fetchTitle(videoId);
+      const title = await fetchTitle(videoId);
       if (videoId) {
         document.getElementById("megaphone").innerHTML = `<p>${title}</p>
                                                           <div class="buttons">

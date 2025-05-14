@@ -47,13 +47,17 @@ body {
   text-align: center;
 }
 .student > p {
-  color: rgb(0, 85, 155);
+  color: rgb(255, 0, 0);
 }
 .tasks {
   position: relative;
   left: 10px;
 }
-
+.tasks div a button {
+  background-color: rgb(241, 241, 241);
+  color: black;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
 #megaphone {
   display: flex;
   align-items: center;
@@ -62,7 +66,7 @@ body {
   row-gap: 10px;
 }
 
-#megaphone a button {
+button {
   padding: 8px 16px;
   border: none;
   border-radius: 5px;
@@ -72,11 +76,13 @@ body {
   cursor: pointer;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.3);
 }
-
-#megaphone a button:hover {
+a {
+  text-decoration: none;
+}
+button:hover {
   background-color: #1764ca;
 }
-@media (max-width:300px) {
+@media (max-width: 300px) {
   .buttons {
     flex-direction: column;
     align-items: center;
