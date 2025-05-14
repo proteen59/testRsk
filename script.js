@@ -40,31 +40,30 @@ function rendering(tasks) {
     document.querySelector(".tasks-container").innerHTML =
       "<div class='class' style='text-align:center'>Loading Tasks</div>";
     return;
-  } else {
-    tasks.forEach((c) => {
-      let studentsHTML = "";
-      c.students.forEach((s) => {
-        let tasksHTML = "";
-        s.tasks.forEach((t) => {
-          if (t.includes("<a")) {
-            tasksHTML += `<div style='margin:5px 5px 5px 0; display:inline-block'>${t}</div>`;
-            return;
-          }
-          tasksHTML += `<p>${t}</p>`;
-        });
-        studentsHTML += `<p>${s.name}</p>
-                        <div class="tasks">${tasksHTML}</div>`;
+  }
+  tasks.forEach((c) => {
+    let studentsHTML = "";
+    c.students.forEach((s) => {
+      let tasksHTML = "";
+      s.tasks.forEach((t) => {
+        if (t.includes("<a")) {
+          tasksHTML += `<div style='margin:5px 5px 5px 0; display:inline-block'>${t}</div>`;
+          return;
+        }
+        tasksHTML += `<p>${t}</p>`;
       });
-      // c for class
-      tasksContainerHtml += `<div class='class'>
+      studentsHTML += `<p>${s.name}</p>
+                        <div class="tasks">${tasksHTML}</div>`;
+    });
+    // c for class
+    tasksContainerHtml += `<div class='class'>
                               <h3 class="class-title">Class ${c.className}</h3>
                               <hr style="margin: 8px 0">
                               <div class="student">${studentsHTML}</div>
                               </div>`;
-    });
+  });
 
-    document.querySelector(".tasks-container").innerHTML = tasksContainerHtml;
-  }
+  document.querySelector(".tasks-container").innerHTML = tasksContainerHtml;
 }
 
 function videoRendering(title, videoId) {
