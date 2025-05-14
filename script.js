@@ -1,27 +1,47 @@
-let tasks = [];
+const playlistId = "PLfk05yfiSxmJmPGazkiYmKZQKi0_lwtK-";
+const apiKey = "AIzaSyA4lMpTZYgr_YOcCyENIkONcZiFkEpbaAY";
 let savedTasks = JSON.parse(localStorage.getItem("savedTasks"));
 const loadingElement = document.getElementById("loading");
+
+const savedTitle = localStorage.getItem("localTitle");
+const savedVideoId = localStorage.getItem("localVideoId");
+
+videoRendering(savedTitle, savedVideoId);
+rendering(savedTasks);
+if (!savedTitle) {
+  document.getElementById("megaphone").innerHTML = "Loading Video";
+}
+
+if (!savedTasks) {
+  loadingElement.remove();
+}
 
 fetch("/api/tasks")
   .then((res) => res.json())
   .then((data) => {
+    if (JSON.stringify(data) === localStorage.getItem("savedTasks")) {
+      loadingElement.innerHTML = "পাল্টানো হয়নি।";
+      loadingElement.style.backgroundColor = "#ffb2b2";
+    } else {
+      loadingElement.innerHTML = "পাল্টানো হয়েছে...";
+      loadingElement.style.backgroundColor = "#8aee97";
+    }
+    setTimeout(() => {
+      loadingElement.remove();
+    }, 4000);
     localStorage.setItem("savedTasks", JSON.stringify(data));
-    tasks = data;
-    loadingElement.remove();
-    rendering(tasks);
+    rendering(data);
   })
   .catch((err) => console.error(err));
 
-rendering(savedTasks);
-
-function rendering(tsk) {
+function rendering(tasks) {
   let tasksContainerHtml = "";
-  if (!tsk) {
+  if (!tasks) {
     document.querySelector(".tasks-container").innerHTML =
       "<div class='class' style='text-align:center'>Loading Tasks</div>";
     return;
   }
-  tsk.forEach((c) => {
+  tasks.forEach((c) => {
     let studentsHTML = "";
     c.students.forEach((s) => {
       let tasksHTML = "";
@@ -46,18 +66,8 @@ function rendering(tsk) {
   document.querySelector(".tasks-container").innerHTML = tasksContainerHtml;
 }
 
-const playlistId = "PLfk05yfiSxmJmPGazkiYmKZQKi0_lwtK-";
-const apiKey = "AIzaSyA4lMpTZYgr_YOcCyENIkONcZiFkEpbaAY";
-
-fetchLatestVideos(playlistId);
-// Fetch latest videos and update the video elements
-async function fetchLatestVideos(playlistId) {
-  try {
-    await new Promise(async () => {
-      const videoId = await getLatestVideoId(playlistId);
-      const title = await fetchTitle(videoId);
-      if (videoId) {
-        document.getElementById("megaphone").innerHTML = `<p>${title}</p>
+function videoRendering(title, videoId) {
+  document.getElementById("megaphone").innerHTML = `<p>${title}</p>
                                                           <div class="buttons">
                                                             <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank">
                                                               <button>Watch Video</button>
@@ -68,7 +78,24 @@ async function fetchLatestVideos(playlistId) {
                                                           </div>
             
             `;
+}
+
+fetchLatestVideos(playlistId);
+// Fetch latest videos and update the video elements
+async function fetchLatestVideos(playlistId) {
+  try {
+    await new Promise(async () => {
+      const videoId = await getLatestVideoId(playlistId);
+      const title = await fetchTitle(videoId);
+
+      if (title !== localStorage.getItem("localTitle")) {
+        document.getElementById("megaphone").style.backgroundColor = "#8aee97";
+        document.getElementById("megaphone").style.border =
+          "1px solid rgba(0,0,0,0.5)";
       }
+      localStorage.setItem("localTitle", title);
+      localStorage.setItem("localVideoId", videoId);
+      videoRendering(title, videoId);
     });
   } catch (error) {
     console.error("Error fetching latest videos:", error);
