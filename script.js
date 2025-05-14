@@ -19,6 +19,7 @@ function rendering(tsk) {
   if (!tsk) {
     document.querySelector(".tasks-container").innerHTML =
       "<div class='class' style='text-align:center'>Loading Tasks</div>";
+    return;
   }
   tsk.forEach((c) => {
     let studentsHTML = "";
