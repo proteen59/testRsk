@@ -14,9 +14,9 @@ fetch("/api/tasks")
 
 rendering(savedTasks);
 
-function rendering(t) {
+function rendering(tsk) {
   let tasksContainerHtml = "";
-  t.forEach((c) => {
+  tsk.forEach((c) => {
     let studentsHTML = "";
     c.students.forEach((s) => {
       let tasksHTML = "";
