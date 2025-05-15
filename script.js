@@ -32,7 +32,10 @@ fetch("/api/tasks")
     localStorage.setItem("savedTasks", JSON.stringify(data));
     rendering(data);
   })
-  .catch((err) => console.error(err));
+  .catch((err) => {
+    console.error(err);
+    console.log("logging");
+  });
 
 function rendering(tasks) {
   let tasksContainerHtml = "";
