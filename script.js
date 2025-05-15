@@ -34,6 +34,8 @@ fetch("/api/tasks")
   })
   .catch((err) => {
     console.error(err);
+    localStorage.clear();
+    location.reload();
     console.log("logging");
   });
 
